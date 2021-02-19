@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 const app = express();
 app.use(express.json());
+const User=require('./model/user');
 
 //connect with mongoDB
 const uri =process.env.DB;
@@ -16,7 +17,6 @@ const connection =mongoose.connection;
 connection.once('open',()=>{
     console.log("MongoDB database connection established successfuly")
 })
-
 
 //routes
 app.get('/', (req, res) => {
