@@ -1,0 +1,22 @@
+{
+  "name": "auth_backend_nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reguiegyounes/auth_backend_nodejs.git"
+  },
+  "author": "reguieg younes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reguiegyounes/auth_backend_nodejs/issues"
+  },
+  "homepage": "https://github.com/reguiegyounes/auth_backend_nodejs#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
