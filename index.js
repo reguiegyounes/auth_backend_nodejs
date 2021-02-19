@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const userRouter=require('./routes/auth_router');
 require('dotenv').config();
 const app = express();
 app.use(express.json());
@@ -22,6 +23,7 @@ connection.once('open',()=>{
 app.get('/', (req, res) => {
     return res.send('<h2>Welcome to Express App<h2>');
 })
+app.use('/auth',userRouter);
 
 
 
