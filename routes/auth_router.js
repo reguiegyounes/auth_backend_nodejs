@@ -1,4 +1,5 @@
 const router =require('express').Router();
+const bcrypt=require('bcryptjs');
 const {registerValidation}=require('../util/validation');
 const User=require('../model/user');
 
@@ -16,14 +17,19 @@ router.post('/register',async(req,res)=>{
     if(emailExist)
         return res.status(404).send('Email already exist');
 
+    //hash password
+    const salt =await bcrypt.genSalt(10);
+    const hashedPassword=await bcrypt.hash(req.body.password,salt);
+
     // add user
     const user=new User({
         email:req.body.email,
-        password:req.body.password
+        password:hashedPassword,
+        salt:salt
     });
     try {
         const userSaved=await user.save();
-        res.send(userSaved);
+        res.send({email:userSaved.email});
     } catch (err) {
         res.send(err);
     }

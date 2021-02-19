@@ -16,6 +16,10 @@ const userSchema =new Schema(
             required:true,
             minlength:3
         },
+        salt: {
+            type:String,
+            required:true
+        },
         created_at:{
             type:Date,
             default:Date.now
