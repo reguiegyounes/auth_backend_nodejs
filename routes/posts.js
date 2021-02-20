@@ -4,6 +4,27 @@ const Post=require('../model/post');
 const {isLoggedIn}=require('../middleware/verifyToken');
 const {createPostValidation}=require('../util/validation');
 
+
+router.get('/',isLoggedIn,async(req,res)=>{
+
+    const getUser=await User.findById(req.user.id);
+    if(!getUser)
+        return res.status(404).send('User not found');
+    
+
+    try {
+        const posts=await Post.find({user:req.user.id});
+        const p=posts.map(post=>{
+           return {title:post.title,
+            description : post.description}
+        });
+        res.send(p);
+    } catch (err) {
+        res.send(err);
+    }
+});
+
+
 router.post('/create',isLoggedIn,async(req,res)=>{
     const {error}=createPostValidation(req.body);
     
@@ -28,6 +49,7 @@ router.post('/create',isLoggedIn,async(req,res)=>{
         res.send(err);
     }
 });
+
 
 
 
