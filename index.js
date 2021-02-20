@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const userRouter=require('./routes/auth_router');
-const verifyToken=require('./middleware/verifyToken');
+const {notLoggedIn}=require('./middleware/verifyToken');
 require('dotenv').config();
 const app = express();
 app.use(express.json());
@@ -21,7 +21,7 @@ connection.once('open',()=>{
 })
 
 //routes
-app.get('/',verifyToken, (req, res) => {
+app.get('/',notLoggedIn, (req, res) => {
     return res.send('<h2>Welcome to Express App<h2>');
 })
 app.use('/auth',userRouter);

@@ -3,10 +3,11 @@ const bcrypt=require('bcryptjs');
 const jwt =require('jsonwebtoken');
 const {registerValidation,loginValidation}=require('../util/validation');
 const User=require('../model/user');
+const {notLoggedIn}=require('../middleware/verifyToken');
 
 
 
-router.post('/register',async(req,res)=>{
+router.post('/register',notLoggedIn,async(req,res)=>{
     
     const {error}=registerValidation(req.body);
     
@@ -36,8 +37,7 @@ router.post('/register',async(req,res)=>{
     }
 });
 
-
-router.post('/login',async(req,res)=>{
+router.post('/login',notLoggedIn,async(req,res)=>{
     
     const {error}=loginValidation(req.body);
     
