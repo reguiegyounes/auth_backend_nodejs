@@ -3,33 +3,28 @@ const mongoose =require('mongoose');
 
 const Schema=mongoose.Schema;
 
-const userSchema =new Schema(
+const postSchema =new Schema(
     {
-        email: {
-            type:String,
-            required:true,
-            unique:true,
-            minlength:3
-        },
-        password: {
+        title: {
             type:String,
             required:true,
             minlength:3
         },
-        salt: {
+        description: {
             type:String,
-            required:true
+            required:true,
+            minlength:3
         },
         created_at:{
             type:Date,
             default:Date.now
         },
-        posts:[ {
+        user: {
             type: Schema.Types.ObjectId,
-            ref: 'Post'
-        }]
+            ref: 'User'
+        }
     }
 );
 
-const User =mongoose.model('User',userSchema);
-module.exports =User;
+const Post =mongoose.model('Post',postSchema);
+module.exports =Post;

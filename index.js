@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const userRouter=require('./routes/auth_router');
+const postsRouter=require('./routes/posts');
 const {notLoggedIn}=require('./middleware/verifyToken');
 require('dotenv').config();
 const app = express();
@@ -25,6 +26,7 @@ app.get('/',notLoggedIn, (req, res) => {
     return res.send('<h2>Welcome to Express App<h2>');
 })
 app.use('/auth',userRouter);
+app.use('/posts',postsRouter);
 
 
 
